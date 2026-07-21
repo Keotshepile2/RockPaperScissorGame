@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <meta http-equiv="CONTENT-TYPE" content="text/html; charset=UTF-8">
+  <title>Rock Paper Scissor</title>
+  <style>
+  .container{
+    border:1px solid lightgrey;
+    border-radius:10px;
+    box-shadow:10px 10px 10px grey;
+    text-align:center;
+    content-align:center;
+  }
+  .play{
+    font-size:1.4em;
+    font-weight:bold;
+    float:left;
+    margin-left:0px;
+  }
+ .play-btns button{
+    background-color:blue;
+    font-size:2.5em;
+    padding:20px;
+    border-radius:80px;
+    border-color:red;
+    margin-right:10px;
+  }
+.play-btns  button:active{
+    opacity:0.1;
+  }
+  .result1{
+    font-size:1.4em;
+    font-weight:bold;
+  }
+  .result2{
+    font-size:1.4em;
+    font-weight:bold;
+  }
+  .reset{
+    background-color:blue;
+    color:white;
+    font-weight:bold;
+    padding:10px 20px;
+    border:1px solid red;
+    border-radius:20px;
+    box-shadow:5px 5px 10px red;
+    margin-bottom:10px;
+  }
+  
+  .score-container{
+     width:70%;
+     border:1px solid grey;
+     border-radius:10px;
+     box-shadow:10px 10px 10px lightblue;
+    text-align:left;
+    margin-bottom:20px;
+    margin-left:50px;
+}
+  .score-container p{
+    font-weight:bold;
+    margin-left:10px;
+  }
+  .list{
+    color:blue;
+  }
+  
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Rock Paper Scissor Game</h2>
+    <p class="play">Play:</p>
+    <div class="play-btns">
+      <button onclick=" playerpick('rock')" class="rock">✊️</button>
+      <button onclick=" playerpick('paper')" class="paper">🖐</button>
+      <button onclick=" playerpick('scissor')" class="scissor">✌️</button>
+    </div>
+    <p class="result1"></p>
+    <p class="result2"></p>
+    
+    <div class="score-container">
+      <p class="win">Wins : 0</p>
+      <p class="lose">Loses : 0</p>
+      <p class="tie">Ties : 0</p>
+    </div>
+    <button onclick=" reset()" class="reset">Reset</button>
+  </div>
+  
+  <script>
+   let win = 0;
+   let lose = 0;
+   let tie = 0;
+ function playerpick(playermove){
+
+   
+   const rand  = Math.floor(Math.random() * 3) +1;
+   let compmove = '';
+   if(rand === 1)
+      compmove = 'rock';
+   else if(rand === 2)
+       compmove = 'paper';
+    else if(rand === 3)
+        compmove = 'scissor';
+   
+  if(playermove === 'rock'){
+       
+       if(compmove === 'rock')
+       {
+         tie++;
+         document.querySelector('.result2').innerHTML = 'Tie';
+         document.querySelector('.tie').innerHTML = `Ties : ${tie}`;
+         document.querySelector('.result1').innerHTML = `player ✊️ | ✊️ computer`;
+         
+       }
+       else if(compmove === 'paper')
+       {
+         lose++;
+         document.querySelector('.result2').innerHTML = 'You lose!';
+         document.querySelector('.lose').innerHTML = `Loses : ${lose}`;
+         document.querySelector('.result1').innerHTML = `player ✊️ | 🖐 computer`;
+       }
+      else  if(compmove === 'scissor')
+       {
+         win++;
+         document.querySelector('.result2').innerHTML = 'You Win';
+         document.querySelector('.win').innerHTML = `Wins : ${win}`;
+         document.querySelector('.result1').innerHTML = `player ✊️ | ✌️ computer`;
+       }
+ }
+     
+ else if(playermove === 'paper'){
+       
+       if(compmove === 'rock')
+       {
+          win++;
+         document.querySelector('.result2').innerHTML = 'You Win';
+         document.querySelector('.win').innerHTML = `Wins : ${win}`;
+         document.querySelector('.result1').innerHTML = `player 🖐 | ✊️ computer`;
+       }
+       else if(compmove === 'paper')
+       {
+         tie++;
+         document.querySelector('.result2').innerHTML = 'Tie';
+         document.querySelector('.tie').innerHTML = `Ties : ${tie}`;
+         document.querySelector('.result1').innerHTML = `player 🖐 | 🖐 computer`;
+       }
+      else  if(compmove === 'scissor')
+       {
+         lose++;
+         document.querySelector('.result2').innerHTML = 'You lose!';
+         document.querySelector('.lose').innerHTML = `Loses : ${lose}`;
+         document.querySelector('.result1').innerHTML = `player 🖐 | ✌️ computer`;
+       }
+ }
+else if(playermove === 'scissor'){
+       
+       if(compmove === 'rock')
+       {
+         lose++;
+         document.querySelector('.result2').innerHTML = 'You lose!';
+         document.querySelector('.lose').innerHTML = `Loses : ${lose}`;
+         document.querySelector('.result1').innerHTML = `player ✌️ | ✊️ computer`;
+       }
+       else if(compmove === 'paper')
+       {
+         win++;
+         document.querySelector('.result2').innerHTML = 'You Win';
+         document.querySelector('.win').innerHTML = `Wins : ${win}`;
+         document.querySelector('.result1').innerHTML = `player ✌️ | 🖐 computer`;
+       }
+      else if(compmove === 'scissor')
+       {
+         tie++;
+         document.querySelector('.result2').innerHTML = 'Tie';
+         document.querySelector('.tie').innerHTML = `Ties : ${tie}`;
+         document.querySelector('.result1').innerHTML = `player ✌️ | ✌️ computer`;
+       }
+}
+   const res = document.querySelector('.result2');
+   if(res.innerHTML === 'You Win')
+         res.style.color ="green";
+   else if(res.innerHTML === 'You lose!')
+         res.style.color ="red";
+   else if(res.innerHTML === 'Tie')
+         res.style.color ="blue";
+   
+        
+   
+ }
+  function reset(){
+    win = 0;
+    lose = 0;
+    tie = 0;
+    document.querySelector('.win').innerHTML = `Wins : 0`;
+    document.querySelector('.lose').innerHTML = `Loses : 0`;
+    document.querySelector('.tie').innerHTML = `Ties : 0`;
+    document.querySelector('.result1').innerHTML = '';
+    document.querySelector('.result2').innerHTML = '';
+    
+  }
+  </script>
+</body>
+</html>
